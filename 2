@@ -1,19 +1,29 @@
-class Farm_Animal: public Animal
-{
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+class Point{
 public:
-    string resource;
-    Farm_Animal(string name,string feature,string sound,string resource): Animal(name,feature,sound)
-    {
-        this->resource= resource;
+    int x, y;
+    Point(){
+        x = y = 0;
     }
-    Farm_Animal& get_source(string res)
-    {
-        int find = false;
-        for (int i = 0; i < resource.size(); i++)
-        {
-            if(res == resource[i]) find++;
-        }
-        if(find) cout << "Got "<< res << " from "<< name << endl;
-        else cout<< name << " no has " << res<< endl;
+    Point (int x, int y){
+        this->x = x;
+        this->y = y;
+    }
+    void Print (){
+        cout << "X:"<< x<< "Y:"<< y<< endl;
     }
 };
+int main (){
+    string path = "test.txt";
+    Point point (10, 40);
+    ofstream fout;
+    fout.open(path, ofstream::app);
+
+        fout.write((char *) &point, sizeof(Point));
+    fout.close();
+    return 0;
+}
